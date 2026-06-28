@@ -20,6 +20,12 @@ ifneq ($(_INCLUDED_AS_CONFIG),)
 include Makefile.vars
 endif
 
+#==============================================================================
+# BUILD-ONLY section — everything below only applies when building the
+# lib itself, not when included by the root Makefile for consumer config.
+#==============================================================================
+ifneq ($(_INCLUDED_AS_CONFIG),)
+
 EXEC_NAME := app
 LIB_NAME := mylib
 
@@ -31,12 +37,6 @@ EXCLUDE_SRCS   ?=
 INCLUDE_DIRS +=
 LIBS_PATH    +=
 DEFINES      +=
-
-#==============================================================================
-# BUILD-ONLY section — everything below only applies when building the
-# lib itself, not when included by the root Makefile for consumer config.
-#==============================================================================
-ifneq ($(_INCLUDED_AS_CONFIG),)
 
 # Compilation flags
 ifeq ($(TARGET),WEB)
